@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="lifeApp">
+
+<head>
+  <title>Game of Life</title>
+
+  <!-- Angular and jQuery -->
+  <script type="text/javascript" src="jquery-2.1.3.min.js"></script>
+  <script type="text/javascript" src="angular.min.js"></script>
+
+  <!-- The JS that runs the game -->
+  <script type="text/javascript" src="script.js"></script>
+
+  <!-- Styles -->
+  <style type="text/css">
+    .row {
+      border-bottom: 1px solid black;
+    }
+    .row: first-child {
+      border-top: 1px solid black;
+    }
+    .table {
+      display: table;
+      border-collapse: collapse;
+    }
+    .dead {
+      display: table-cell;
+      border-right: 1px solid #ccc;
+      width: 15px;
+      width: 15px;
+      background: #FFFFFF;
+    }
+    .dead: first-child {
+      border-left: 1px solid #ccc;
+    }
+    .alive {
+      display: table-cell;
+      border-right: 1px solid #ccc;
+      width: 15px;
+      width: 15px;
+      background: #000000;
+    }
+    .alive: first-child {
+      border-left: 1px solid #ccc;
+    }
+  </style>
+
+</head>
+
+<body ng-controller="LifeController" ng-init="init()">
+
+  <button ng-click="startStop()">{{curAction}}</button>
+  <button ng-click="init()" ng-disabled="isRunning">Randomize</button>
+  <span>Grid size (30-100): <input type="number" min="30" max="100" ng-model="size" ng-disabled="isRunning" ng-change="init()" /></span>
+  <span>Tick Count: {{tickCount}}</span>
+
+  <br />
+  <br />
+
+  <!-- Set up the grid to display the game -->
+  <div class="table">
+    <div class="row" ng-repeat="row in grid">
+      <div ng-class="{dead: !cell.alive, alive: cell.alive}" ng-repeat="cell in row">
+        <!-- The actual grid cell -->
+        &nbsp;
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+</html>
